@@ -1,37 +1,71 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import './App.css';
+import '@aws-amplify/ui-react/styles.css';
+import {  Route, Routes } from "react-router-dom";
+import Layout from "./pages/Layout";
+import FileUpload from "./pages/FileUpload";
+import Home from "./pages/Home";
+import HighChart from "./pages/HighChart";
+
+//Vermont Kids Data
+
+const AppRoutes = () => (
+    <Routes >
+        <Route path="/" element={<Layout/>} />
+        <Route index element={<Home/>}/>
+        <Route path="upload" element={<FileUpload/>}/>
+        <Route path="chart" element={<HighChart/>}/>
+    </Routes>
+);
 
 function App() {
-  const [showResult, setShowResult] = useState(false);
-  const [apiMessage, setApiMessage] = useState("");
 
-  const getApiMessage = async () => {
-
-    console.log(process.env.REACT_APP_ENDPOINT);
-    const response = await fetch(`${process.env.REACT_APP_ENDPOINT}hello`, {
-      mode: 'cors'
-    });
-    
-    const responseData = await response.text();
-    console.log(responseData)
-
-    setShowResult(true);
-    setApiMessage(responseData);  
-  };
-
+  //const { user } = useAuthenticator((context) => [context.user]);
+  //const { route } = useAuthenticator(context => [context.route]);
+  //console.log(user);
+  //console.log(route);
 
   return (
+
     <div className="App">
-      <header className="App-header">
-        <h1>CALL AN API</h1>
-        <h2>My bucket is {process.env.REACT_APP_BUCKET}</h2>
-        <button onClick={getApiMessage}>Call Lambda</button>
-        <div>
-          {showResult && <code>{JSON.stringify(apiMessage, null, 2)}</code>}
-        </div>
-      </header>
+        <AppRoutes />
     </div>
   );
 }
 
 export default App;
+
+/*
+
+<BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Layout/>}>
+                    <Route index element={<Home/>}/>
+                    <Route path="upload" element={<FileUpload/>}/>
+                    <Route path="chart" element={<HighChart/>}/>
+                </Route>
+            </Routes>
+        </BrowserRouter>
+
+{ user &&
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Layout/>}>
+                    <Route index element={<Home/>}/>
+                    <Route path="upload" element={<FileUpload/>}/>
+                    <Route path="chart" element={<HighChart/>}/>
+                </Route>
+            </Routes>
+        </BrowserRouter>
+        }
+<Authenticator>
+            {({ signOut, user }) => (
+                <div className="App">
+                    <p>
+                        Hey {user.username}, welcome to my channel, with auth!
+                    </p>
+                    <button onClick={signOut}>Sign out</button>
+                </div>
+            )}
+        </Authenticator>
+ */
