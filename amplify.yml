@@ -6,6 +6,8 @@ frontend:
         - npm ci
     build:
       commands:
+        - echo "REACT_APP_ENDPOINT=$ENDPOINT" >>.env
+        - echo "REACT_APP_REGION=$REGION" >>.env
         - npm run build
   artifacts:
     baseDirectory: build
