@@ -8,6 +8,7 @@ frontend:
       commands:
         - echo "REACT_APP_ENDPOINT=$ENDPOINT" >>.env
         - echo "REACT_APP_REGION=$REGION" >>.env
+        - echo "REACT_APP_BUCKET=$BUCKET" >>.env
         - npm run build
   artifacts:
     baseDirectory: build

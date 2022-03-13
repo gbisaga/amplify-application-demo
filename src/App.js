@@ -24,6 +24,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>CALL AN API</h1>
+        <h2>My bucket is {process.env.REACT_APP_BUCKET}</h2>
         <button onClick={getApiMessage}>Call Lambda</button>
         <div>
           {showResult && <code>{JSON.stringify(apiMessage, null, 2)}</code>}
